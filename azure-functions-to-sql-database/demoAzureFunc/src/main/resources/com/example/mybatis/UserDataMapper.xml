@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.UserDataMapper">
+    <resultMap id="userDataResultMap" type="com.example.mybatis.model.UserData" >
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="birth_year" property="birth_year" jdbcType="INTEGER" />
+        <result column="birth_month" property="birth_month" jdbcType="INTEGER" />
+        <result column="birth_day" property="birth_day" jdbcType="INTEGER" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="memo" property="memo" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="getUserData" parameterType="java.lang.Integer" resultMap="userDataResultMap">
+        SELECT id, name, birth_year, birth_month, birth_day, sex, memo
+        FROM USER_DATA
+        WHERE id = #{id}
+    </select>
+</mapper>
