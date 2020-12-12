@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.UserDataMapper">
+    <resultMap id="userDataResultMap" type="com.example.mybatis.model.UserData" >
+        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="birthYear" property="birthYear" jdbcType="VARCHAR" />
+        <result column="birthMonth" property="birthMonth" jdbcType="VARCHAR" />
+        <result column="birthDay" property="birthDay" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="searchUserDataList" parameterType="com.example.model.SearchForm" resultMap="userDataResultMap">
+        SELECT 
+              u.id
+            , u.name
+            , u.birth_year AS birthYear
+            , u.birth_month AS birthMonth
+            , u.birth_day AS birthDay
+            , s.sex_value AS sex
+        FROM user_data u, m_sex s
+        WHERE u.sex = s.sex_cd
+        <if test="searchName != null and searchName != ''">
+            AND u.name like CONCAT('%', #{searchName}, '%')
+        </if>
+        <if test="searchSex != null and searchSex != ''">
+            AND u.sex = #{searchSex}
+        </if>
+    </select>
+</mapper>
