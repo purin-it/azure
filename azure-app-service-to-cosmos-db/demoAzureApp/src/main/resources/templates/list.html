@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>検索一覧画面</title>
+</head>
+<body>
+	<form method="post" th:action="@{/search}" th:object="${searchForm}">
+		<table border="1" cellpadding="5">
+            <tr>
+                <th>名前</th>
+                <td><input type="text" th:value="*{searchName}" th:field="*{searchName}" /></td>
+            </tr>
+            <tr>
+                <th>性別</th>
+                <td>
+                    <select th:field="*{searchSex}">
+                        <option value=""></option>
+                        <option th:each="item : *{getSexItems()}"
+                                th:value="${item.key}" th:text="${item.value}"/>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br/><br/>
+        <input type="submit" value="検索" />
+        <br/><br/><br/><br/>
+        <table border="1" cellpadding="5">
+        	<tr>
+        	    <th width="40">ID</th>
+        	    <th width="180">名前</th>
+        	    <th width="180">生年月日</th>
+        	    <th width="40">性別</th>
+        	</tr>
+        	<tr th:each="obj : *{userDataList}">
+        	    <td th:text="${obj.id}" align="center"></td>
+        	    <td th:text="${obj.name}" align="center"></td>
+        	    <td th:text="|${obj.birth_year}年 ${obj.birth_month}月 ${obj.birth_day}日|" align="center"></td>
+        	    <td th:text="${obj.sex}" align="center"></td>
+        	</tr>
+        </table>
+	</form>
+</body>
+</html>
