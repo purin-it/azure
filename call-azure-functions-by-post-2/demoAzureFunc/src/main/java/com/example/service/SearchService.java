@@ -16,7 +16,7 @@ public class SearchService {
 
 	/**
 	 * DBから検索条件に合うユーザーデータを取得し結果を返却する
-	 * @param user HttpRequestの引数のユーザー
+	 * @param searchForm 検索条件Form
 	 * @return 結果情報オブジェクト
 	 */
 	public SearchResult getUserDataList(SearchForm searchForm) {
