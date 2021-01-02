@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>初期表示画面</title>
+</head>
+<body>
+	Azure App Serviceで取得したシークレット：<span th:text="${keySecretAppService}">keySecretAppService</span><br/><br/>
+	Azure Functionsで取得したシークレット：<span th:text="${keySecretFunctions}">keySecretFunctions</span>
+</body>
+</html>
