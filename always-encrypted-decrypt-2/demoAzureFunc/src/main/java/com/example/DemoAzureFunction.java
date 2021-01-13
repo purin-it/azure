@@ -28,6 +28,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerKeyVaultAuthenticationCallback;
 @SpringBootApplication
 public class DemoAzureFunction {
 
+	/** Key Vaultの認証の接続設定が終わっているかどうかを判定するフラグ */
+	private static boolean keyVaultProviderFlg = false;
+
 	/** USER_PASSデータ取得サービスクラスのオブジェクト */
 	@Autowired
 	private GetUserPassService getUserPassService;
@@ -39,15 +42,18 @@ public class DemoAzureFunction {
 	/**
 	 * Key Vaultの認証の接続設定を登録する
 	 * @throws SQLException       SQL例外
-	 * @throws URISyntaxException　URI文法エラー
+	 * @throws URISyntaxException URI文法エラー
 	 */
 	@PostConstruct
 	public void postConstruct() throws SQLException, URISyntaxException {
-		SQLServerColumnEncryptionAzureKeyVaultProvider akvProvider = new SQLServerColumnEncryptionAzureKeyVaultProvider(
-				tryAuthenticationCallback());
-		Map<String, SQLServerColumnEncryptionKeyStoreProvider> keyStoreMap = new HashMap<String, SQLServerColumnEncryptionKeyStoreProvider>();
-		keyStoreMap.put(akvProvider.getName(), akvProvider);
-		SQLServerConnection.registerColumnEncryptionKeyStoreProviders(keyStoreMap);
+		if (!keyVaultProviderFlg) {
+			SQLServerColumnEncryptionAzureKeyVaultProvider akvProvider = new SQLServerColumnEncryptionAzureKeyVaultProvider(
+					tryAuthenticationCallback());
+			Map<String, SQLServerColumnEncryptionKeyStoreProvider> keyStoreMap = new HashMap<String, SQLServerColumnEncryptionKeyStoreProvider>();
+			keyStoreMap.put(akvProvider.getName(), akvProvider);
+			SQLServerConnection.registerColumnEncryptionKeyStoreProviders(keyStoreMap);
+			keyVaultProviderFlg = true;
+		}
 	}
 
 	/**
