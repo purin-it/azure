@@ -30,6 +30,9 @@ public class DemoAzureFunction {
 	/** keyVaultのクライアントキー */
 	@Value("${keyVaultClientKey}")
 	private String keyVaultClientKey;
+	
+	/** Key Vaultの認証の接続設定が終わっているかどうかを判定するフラグ */
+	private static boolean keyVaultProviderFlg = false;
 
 	/** USER_PASSデータ取得サービスクラスのオブジェクト */
 	@Autowired
@@ -45,11 +48,14 @@ public class DemoAzureFunction {
 	 */
 	@PostConstruct
 	public void postConstruct() throws SQLException {
-		SQLServerColumnEncryptionAzureKeyVaultProvider akvProvider = new SQLServerColumnEncryptionAzureKeyVaultProvider(
-				keyVaultClientId, keyVaultClientKey);
-		Map<String, SQLServerColumnEncryptionKeyStoreProvider> keyStoreMap = new HashMap<String, SQLServerColumnEncryptionKeyStoreProvider>();
-		keyStoreMap.put(akvProvider.getName(), akvProvider);
-		SQLServerConnection.registerColumnEncryptionKeyStoreProviders(keyStoreMap);
+		if (!keyVaultProviderFlg) {
+			SQLServerColumnEncryptionAzureKeyVaultProvider akvProvider = new SQLServerColumnEncryptionAzureKeyVaultProvider(
+					keyVaultClientId, keyVaultClientKey);
+			Map<String, SQLServerColumnEncryptionKeyStoreProvider> keyStoreMap = new HashMap<String, SQLServerColumnEncryptionKeyStoreProvider>();
+			keyStoreMap.put(akvProvider.getName(), akvProvider);
+			SQLServerConnection.registerColumnEncryptionKeyStoreProviders(keyStoreMap);
+			keyVaultProviderFlg = true;
+		}
 	}
 
 	/**
