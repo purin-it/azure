@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メイン画面</title>
+</head>
+<body>
+    <form method="post" th:action="@{/updUserPass}">
+                   更新後のUserPass： <input type="text" name="updUserPass" /><br/><br/>
+	    <input type="submit" value="UserPassを更新" /><br/><br/>
+	    <div th:if="${updUserPassMsg}">
+	        <span th:text="${updUserPassMsg}">updUserPassMsgの値</span>
+	    </div>
+	</form>
+    <br/><br/><hr/><br/>
+	<form method="post" th:action="@{/getUserPass}">
+	    <input type="submit" value="getUserPassの値を取得" /><br/><br/>
+	    <div th:if="${getUserPass}">
+	    	<span th:text="${getUserPass}">getUserPassで取得した値</span>
+	    </div>
+	</form>
+</body>
+</html>
