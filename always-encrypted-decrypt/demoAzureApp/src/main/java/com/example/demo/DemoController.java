@@ -33,16 +33,20 @@ public class DemoController {
 	private String demoAzureFuncBase;
 
 	/**
-	 * 検索一覧画面を初期表示する.
-	 * 
+	 * メイン画面を初期表示する.
 	 * @param model Modelオブジェクト
-	 * @return 検索一覧画面
+	 * @return メイン画面
 	 */
 	@GetMapping("/")
 	public String index(Model model) {
 		return "main";
 	}
 
+	/**
+	 * 暗号化されたパスワードを取得する.
+	 * @param model Modelオブジェクト
+	 * @return メイン画面
+	 */
 	@PostMapping("/getUserPass")
 	public String getUserPass(Model model) {
 		// Azure FunctionsのgetUserPass関数を呼び出すためのヘッダー情報を設定する
