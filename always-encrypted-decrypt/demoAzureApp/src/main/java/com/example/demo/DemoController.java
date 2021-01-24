@@ -61,7 +61,7 @@ public class DemoController {
 		ResponseEntity<String> response = restTemplate.exchange(demoAzureFuncBase + "getUserPass", HttpMethod.POST,
 				entity, String.class);
 
-		// Azure Functionsの呼出結果のユーザーデータ一覧を、検索条件Formに設定する
+		// Azure Functionsの呼出結果を、Modelオブジェクトに設定する
 		try {
 			GetUserPassResult getUserPassResult = objectMapper.readValue(response.getBody(), GetUserPassResult.class);
 			if (getUserPassResult != null && getUserPassResult.getUserPass() != null) {
