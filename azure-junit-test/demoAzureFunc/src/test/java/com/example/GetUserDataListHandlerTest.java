@@ -19,9 +19,12 @@ public class GetUserDataListHandlerTest {
 	 */
 	@Test
 	public void executeTest() {
+		// AzureSpringBootRequestHandlerクラスのオブジェクトを生成し、GetUserDataListHandlerクラスのexecuteメソッドを実行
 		AzureSpringBootRequestHandler<SearchForm, SearchResult> handler = new AzureSpringBootRequestHandler<>(
 				DemoAzureFunction.class);
 		SearchResult result = handler.handleRequest(new SearchForm(), null);
+		
+		// AzureSpringBootRequestHandlerクラスのオブジェクトをcloseするのを忘れず行う
 		handler.close();
 		
 		// 取得内容をコンソールに表示
