@@ -43,7 +43,7 @@
       <artifactId>spring-boot-starter-test</artifactId>  
       <scope>test</scope> 
     </dependency>
-    <!-- Spring Boot 2.4.0でJUnitのテストクラスを利用するための設定 -->
+    <!-- Spring Boot 2.4.0でJUnit 4のテストクラスを利用するための設定 -->
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
