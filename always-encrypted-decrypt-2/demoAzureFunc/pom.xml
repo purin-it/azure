@@ -41,6 +41,11 @@
             <artifactId>spring-cloud-starter-function-web</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- Spring Boot Webの設定 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- SQL Serverを利用するための設定 -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -93,7 +98,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-function-dependencies</artifactId>
-                <version>3.0.10.RELEASE</version>
+                <version>2.0.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
