@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <environments default="sqldb">
+    <!-- 接続先DB毎にenvironment要素を記載する -->
+    <environment id="sqldb">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://azure-db-purinit.database.windows.net:1433;database=azureSqlDatabase;columnEncryptionSetting=Enabled"/>
+        <property name="username" value="purinit@azure-db-purinit"/>
+        <property name="password" value="(DBのパスワード)"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- 参照するMapperのXMLファイル名を記載する -->
+  <mappers>
+    <mapper resource="com/example/mybatis/UserPassMapper.xml" />
+  </mappers>
+</configuration>
