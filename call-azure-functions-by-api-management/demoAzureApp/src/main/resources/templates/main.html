@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メイン画面</title>
+</head>
+<body>
+    <form method="post" th:action="@{/callFunction}">
+    	ファンクションを呼び出すには、ボタンを押下してください。<br/><br/>
+    	<input type="submit" value="ファンクション呼び出し" />
+	</form>
+</body>
+</html>
