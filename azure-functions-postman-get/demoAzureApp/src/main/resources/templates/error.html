@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>エラー画面</title>
+</head>
+<body>
+    <form method="post" th:action="@{/backToMain}">
+    	エラー(HTTP 429 TOO_MANY_REQUESTS)が発生しました。
+    	<br/><br/>
+    	<input type="submit" value="戻る" />
+	</form>
+</body>
+</html>
