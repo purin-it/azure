@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>遷移先画面</title>
+</head>
+<body>
+    <form method="post" th:action="@{/backToMain}">
+    	ファンクション呼出が完了しました。<br/>
+    	呼出結果：<span th:text="${result}">ここにファンクション呼出結果が設定されます。</span>
+    	<br/><br/>
+    	<input type="submit" value="戻る" />
+	</form>
+</body>
+</html>
