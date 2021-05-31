@@ -57,7 +57,7 @@ public class DemoController {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
 		// Azure FunctionsにアクセスするためのAPIキーを設定する
-		headers.add("x-functions-key", "FkXQVuzmj2z7Kqq6v64oHv2x6T8YzPm1ygDFik/RPcVPRuM6QvOmGQ==");
+		headers.add("x-functions-key", "(Azure FunctionsにアクセスするためのAPIキー)");
 
 		// Azure FunctionsのgetUserDataList関数を呼び出すための引数を設定する
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
