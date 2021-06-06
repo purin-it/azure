@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>エラー画面</title>
+</head>
+<body>
+    <form method="post" th:action="@{/backToMain}">
+    	エラーが発生しました。<br/>
+    	発生したエラー： <span th:text="${errMsg}"></span>
+    	<br/><br/>
+    	<input type="submit" value="戻る" />
+	</form>
+</body>
+</html>
