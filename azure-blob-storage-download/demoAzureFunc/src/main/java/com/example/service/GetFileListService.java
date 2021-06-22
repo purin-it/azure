@@ -39,7 +39,7 @@ public class GetFileListService {
 	public GetFileListResult getFileList(GetFileListParam getFileListParam) {
 		GetFileListResult result = new GetFileListResult();
 
-		// ファイルアップロード処理
+		// ファイルリスト取得処理
 		try {
 			// Blobストレージへの接続文字列
 			String storageConnectionString = "DefaultEndpointsProtocol=https;" + "AccountName=" + storageAccountName
