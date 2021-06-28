@@ -215,7 +215,7 @@ public class DemoBatchService {
 		}
 
 		// 7列目の桁数が不正な場合はエラー
-		if (strArray[6].length() > 1024) {
+		if (!StringUtils.isEmpty(strArray[6]) && strArray[6].length() > 1024) {
 			LOGGER.info(lineCnt + "行目： 7列目の桁数が不正です。");
 			return null;
 		}
