@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メイン画面</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data" th:action="@{/upload}">
+    	<th:block th:if="!${#strings.isEmpty(message)}">
+    		<span th:text="${message}">メッセージ</span><br/><br/>
+    	</th:block>
+        <th:block th:if="!${#strings.isEmpty(errMessage)}">
+    		<font color="#FF0000"><span th:text="${errMessage}">エラーメッセージ</span></font><br/><br/>
+    	</th:block>
+    	ファイル ： <input type="file" name="upload_file" /><br/><br/>
+    	<input type="submit" value="アップロード" />
+	</form>
+	<br/><br/>
+	アップロードファイルリスト：<br/>
+	<table border="1" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>ファイル名</th>
+            <th>ファイルパス</th>
+            <th>ファイルダウンロード</th>
+        </tr>
+        <tr th:each="obj : ${fileDataList}">
+            <td th:text="${obj.id}"></td>
+            <td th:text="${obj.fileName}"></td>
+            <td th:text="${obj.filePath}"></td>
+            <td>
+                <!-- ダウンロードボタンを表示 -->
+                <form action="#" method="get"
+                      th:action="@{/download(id=${'__${obj.id}__'})}"
+                      th:method="download" >
+                    <input type="hidden" name="_method" value="download" />
+                    <input type="submit" value="ダウンロード" />
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br/><br/><hr/><br/>
+    <th:block th:if="!${#strings.isEmpty(appServiceMessage)}">
+        App Serviceのメッセージ: <span th:text="${appServiceMessage}">App Serviceのメッセージ</span><br/><br/>
+    </th:block>
+    <th:block th:if="!${#strings.isEmpty(azureFunctionsMessage)}">
+        Azure Functionsのメッセージ: <span th:text="${azureFunctionsMessage}">Azure Functionsのメッセージ</span>
+    </th:block>
+</body>
+</html>
