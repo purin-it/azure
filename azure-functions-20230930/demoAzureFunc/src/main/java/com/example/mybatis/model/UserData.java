@@ -6,19 +6,19 @@ import lombok.Data;
 public class UserData {
 
 	/** ID */
-	private int id;
+	private String id;
 	
 	/** 名前 */
 	private String name;
 	
 	/** 生年月日_年 */
-	private int birth_year;
+	private String birth_year;
 	
 	/** 生年月日_月 */
-	private int birth_month;
+	private String birth_month;
 	
 	/** 生年月日_日 */
-	private int birth_day;
+	private String birth_day;
 	
 	/** 性別 */
 	private String sex;

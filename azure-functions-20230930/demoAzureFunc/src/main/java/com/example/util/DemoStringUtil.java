@@ -1,29 +1,20 @@
 package com.example.util;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class DemoStringUtil {
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.common.sas.AccountSasPermission;
+import com.azure.storage.common.sas.AccountSasResourceType;
+import com.azure.storage.common.sas.AccountSasService;
+import com.azure.storage.common.sas.AccountSasSignatureValues;
 
-	/**
-	 * 文字列前後のダブルクォーテーションを削除する.
-	 * @param str 変換前文字列
-	 * @return 変換後文字列
-	 */
-	public static String trimDoubleQuot(String regStr) {
-		if (StringUtils.isEmpty(regStr)) {
-			return regStr;
-		}
-		char c = '"';
-		if (regStr.charAt(0) == c && regStr.charAt(regStr.length() - 1) == c) {
-			return regStr.substring(1, regStr.length() - 1);
-		} else {
-			return regStr;
-		}
-	}
+public class DemoStringUtil {
 
 	/**
 	 * DateTimeFormatterを利用して日付チェックを行う.
@@ -60,4 +51,29 @@ public class DemoStringUtil {
 		}
 		return intNum;
 	}
+
+	/**
+	 * 引数で指定したBlobのSASトークンを生成し返す.
+	 * @param client Blobサービスクライアントオブジェクト
+	 * @return SASトークン
+	 */
+	public static String getServiceSasUriForBlob(BlobServiceClient client) {
+		// SASトークンのアクセス権を読み取り可能に設定
+		AccountSasPermission permissions = new AccountSasPermission().setReadPermission(true);
+
+		// SASトークンがBlobコンテナやオブジェクトにアクセスできるように設定
+		AccountSasResourceType resourceTypes = new AccountSasResourceType().setContainer(true).setObject(true);
+
+		// SASトークンがBlobにアクセスできるように設定
+		AccountSasService services = new AccountSasService().setBlobAccess(true);
+
+		// SASトークンの有効期限を5分に設定
+		OffsetDateTime expiryTime = OffsetDateTime.now().plus(Duration.ofMinutes(5));
+
+		// SASトークンを作成
+		AccountSasSignatureValues sasValues = new AccountSasSignatureValues(expiryTime, permissions, services,
+				resourceTypes);
+		return client.generateAccountSas(sasValues);
+	}
+
 }
