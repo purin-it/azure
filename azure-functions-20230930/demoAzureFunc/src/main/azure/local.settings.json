@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=azureblobpurinit;AccountKey=(Azure Blob Storageのアクセスキー)",
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "MAIN_CLASS":"com.example.DemoAzureFunction",
+    "AzureWebJobsDashboard": "",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_271"
+  }
+}
