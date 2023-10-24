@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.UserDataMapper">
+    <update id="upsert" parameterType="com.example.mybatis.model.UserData">
+        MERGE INTO USER_DATA AS u 
+        USING ( SELECT #{id} id, #{version} version ) s
+        ON ( u.id = s.id ) 
+        WHEN MATCHED AND u.version = s.version THEN
+           UPDATE SET name = #{name}, birth_year = #{birth_year}, birth_month = #{birth_month}
+               , birth_day = #{birth_day}, sex = #{sex}, memo = #{memo}, version = #{version} + 1
+        WHEN NOT MATCHED THEN
+           INSERT ( id, name, birth_year, birth_month, birth_day, sex, memo, version ) 
+           VALUES (#{id}, #{name}, #{birth_year}, #{birth_month}, #{birth_day}, #{sex}, #{memo}, #{version})
+        ;
+    </update>
+    <select id="findByIdRowLock" parameterType="java.lang.Integer" resultType="com.example.mybatis.model.UserData">
+        SELECT id, name, birth_year, birth_month, birth_day, sex, memo, version 
+        FROM USER_DATA WITH(ROWLOCK, UPDLOCK, NOWAIT) <!-- Azure SQL Databaseで行ロックをかける -->
+        WHERE id = #{id} 
+    </select>
+    <update id="updateVersion" parameterType="com.example.mybatis.model.UserData">
+        UPDATE USER_DATA SET version = #{version} + 2 WHERE id = #{id}
+    </update>
+</mapper>
