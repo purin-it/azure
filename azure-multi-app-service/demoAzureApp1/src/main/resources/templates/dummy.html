@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ダミー画面</title>
+  <script th:inline="javascript">
+    window.addEventListener("load", function() {
+      // DemoControllerクラスのshowCalleeメソッド内で設定したcalleeUrl,addParamの値を取得
+      const calleeUrl = /*[[${calleeUrl}]]*/"calleeUrl";
+      const addParam = /*[[${addParam}]]*/"addParam";
+      
+      // demoAzureApp2プロジェクトの初期表示画面に遷移
+      window.location.href = calleeUrl + "?addParam=" + addParam;
+    });
+  </script>
+</head>
+<body>
+  <p>これはダミー画面です。次画面に遷移中です。</p>
+</body>
+</html>

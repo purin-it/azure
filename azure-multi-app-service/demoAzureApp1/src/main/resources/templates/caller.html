@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>呼出元画面</title>
+  <script>
+    function openWin(formName){
+      let form = document.forms[formName];
+      if(!form){
+        alert('指定したフォームが取得できませんでした');
+        return;
+      }
+      let win = window.open('about:blank', formName);
+      form.target = formName;
+      form.submit();
+      win.focus();
+    }
+  </script>
+</head>
+<body>
+  <p>これは呼出元画面です。</p>
+  <form th:action="@{/showCallee}" method="POST" name="formPost">
+         呼出先画面に渡す値: <input type="text" name="addSession" th:value="${data}" />
+    <input type="button" value="呼出先画面を表示" onclick="openWin('formPost');" />
+  </form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>呼出先画面</title>
+</head>
+<body>
+  <p>これは呼出先画面です。呼出元画面から渡された値は以下です。</p>
+     セッションで取得した値→『<span th:text="${sessionData}">ここに設定</span>』<br/>
+     リクエストパラメータから取得した値→『<span th:text="${paramData}">ここに設定</span>』<br/>
+</body>
+</html>
