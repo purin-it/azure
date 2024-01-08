@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.batch.UserDataMapperBatch">
+    <select id="findByIdRowLock" parameterType="java.lang.Integer" resultType="com.example.mybatis.model.UserData">
+        SELECT id, name, birth_year, birth_month, birth_day, sex, memo, version 
+        FROM USER_DATA WITH(ROWLOCK, UPDLOCK, NOWAIT) <!-- Azure SQL Databaseで行ロックをかける -->
+        WHERE id = #{id} 
+    </select>
+    <update id="updateVersion" parameterType="com.example.mybatis.model.UserData">
+        UPDATE USER_DATA SET version = #{version} + 2 WHERE id = #{id}
+    </update>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.example.mybatis.model.UserData">
+        SELECT id, name, birth_year, birth_month, birth_day, sex, memo, version 
+        FROM USER_DATA
+        WHERE id = #{id} 
+    </select>
+    <insert id="insert" parameterType="com.example.mybatis.model.UserData">
+        INSERT INTO USER_DATA ( id, name, birth_year, birth_month, birth_day, sex, memo, version ) 
+        VALUES (#{id}, #{name}, #{birth_year}, #{birth_month}, #{birth_day}, #{sex}, #{memo}, #{version})
+    </insert>
+    <update id="update" parameterType="com.example.mybatis.model.UserData">
+        UPDATE USER_DATA SET name = #{name}, birth_year = #{birth_year}, birth_month = #{birth_month}
+            , birth_day = #{birth_day}, sex = #{sex}, memo = #{memo}, version = #{version} + 1
+        WHERE id = #{id} AND version = #{version}
+    </update>
+</mapper>

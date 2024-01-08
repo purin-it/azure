@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.online.UserDataMapperOnline">
+    <update id="updateVersion" parameterType="java.lang.Integer">
+        UPDATE USER_DATA SET version = version + 1 WHERE id = #{id}
+    </update>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.example.mybatis.model.UserData">
+        SELECT id, name, birth_year, birth_month, birth_day, sex, memo, version 
+        FROM USER_DATA
+        WHERE id = #{id}
+    </select>
+</mapper>
